@@ -1,0 +1,236 @@
+<atlassian-plugin key="com.mesilat.oracle-htp-plugin" name="Oracle HTP Plugin" plugins-version="2">
+    <plugin-info>
+        <description>This plugin for Atlassian Confluence acts as a web gateway for your Oracle database</description>
+        <version>${project.version}</version>
+        <vendor name="${project.organization.name}" url="https://github.com/mesilat/oracle-htp-plugin" />
+        <param name="plugin-icon">images/pluginIcon.png</param>
+        <param name="plugin-logo">images/pluginLogo.png</param>
+        <param name="configure.url">/plugins/servlet/oracle-htp/config</param>
+    </plugin-info>
+
+    <resource type="i18n" name="i18n" location="i18n/oracle-htp"/>
+    <resource type="download" name="images/" location="/images"/>
+
+    <web-resource key="util" name="util">
+        <resource type="download" name="ohp-utility.js" location="/js/utility.js"/>
+    </web-resource>
+
+    <web-resource key="chart" name="Chart Web Resources">
+        <resource type="download" name="d3.js"  location="/js/d3.js" />
+        <resource type="download" name="c3.js"  location="/js/c3.js" />
+        <resource type="download" name="c3.css" location="/css/c3.css"/>
+    </web-resource>
+
+    <web-resource key="config-resources" name="Oracle HTP Plugin Config Web Resources">
+        <transformation extension="js">
+            <transformer key="jsI18n"/>
+        </transformation>
+        <transformation extension="soy">
+            <transformer key="soyTransformer">
+                <functions>com.atlassian.confluence.plugins.soy:soy-core-functions</functions>
+            </transformer>
+        </transformation>
+
+        <dependency>com.atlassian.auiplugin:ajs</dependency>
+        <dependency>com.atlassian.auiplugin:dialog2</dependency>
+        <dependency>confluence.web.resources:shared-templates</dependency>
+        <dependency>com.atlassian.confluence.plugins.confluence-ui-components:user-group-select2</dependency>
+        <dependency>com.mesilat.oracle-htp-plugin:util</dependency>
+
+        <resource type="download" name="config.js"      location="/js/config.js"/>
+        <resource type="download" name="config.dads.js" location="/js/config.dads.js"/>
+        <resource type="download" name="config.gelf.js" location="/js/config.gelf.js"/>
+        <resource type="download" name="config.soy.js"  location="/templates/config.soy"/>
+    </web-resource>
+
+    <web-resource key="macro-editor-resources" name="Macro Editor Web Resources">
+        <transformation extension="js">
+            <transformer key="jsI18n"/>
+        </transformation>
+
+        <dependency>confluence.editor.actions:editor-macro-browser</dependency>
+        <dependency>com.atlassian.auiplugin:aui-experimental-tooltips</dependency>
+        <dependency>com.mesilat.oracle-htp-plugin:util</dependency>
+
+        <resource type="download" name="editor.macro.css" location="/css/editor.macro.css" />
+        <resource type="download" name="editor.macro.js"  location="/js/editor.macro.js" />
+        <resource type="download" name="editor.dad.js"    location="/js/editor.dad.js" />
+        <context>macro-browser</context>
+    </web-resource>
+
+    <web-resource key="macro-runner-resources" name="Macro Runner Web Resources">
+        <transformation extension="js">
+            <transformer key="jsI18n"/>
+        </transformation>
+        <transformation extension="soy">
+            <transformer key="soyTransformer">
+                <functions>com.atlassian.confluence.plugins.soy:soy-core-functions</functions>
+            </transformer>
+        </transformation>
+
+        <dependency>confluence.web.resources:ajs</dependency>
+        <dependency>com.atlassian.auiplugin:aui-select2</dependency>
+        <dependency>com.atlassian.auiplugin:aui-spinner</dependency>
+        <dependency>com.atlassian.auiplugin:aui-experimental-iconfont</dependency>
+        <dependency>com.atlassian.auiplugin:dialog2</dependency>
+        <dependency>com.atlassian.confluence.plugins.expand-macro:expand-macro-core</dependency>
+        <dependency>com.atlassian.auiplugin:aui-experimental-table-sortable</dependency>
+        <dependency>com.mesilat.oracle-htp-plugin:util</dependency>
+        <dependency>com.mesilat.oracle-htp-plugin:chart</dependency>
+
+        <resource type="download" name="macro.processing.js" location="/js/macro.processing.js" />
+        <resource type="download" name="macro.sidebar.js"    location="/js/macro.sidebar.js" />
+        <resource type="download" name="macro.js"            location="/js/macro.js" />
+        <resource type="download" name="macro.css"           location="/css/macro.css" />
+        <resource type="download" name="macro.soy.js"        location="/templates/macro.soy" />
+        <context>atl.general</context>
+    </web-resource>
+
+    <web-resource key="macro-resources" name="Templates Web Resourses">
+        <transformation extension="js">
+            <transformer key="jsI18n"/>
+        </transformation>
+        <transformation extension="soy">
+            <transformer key="soyTransformer">
+                <functions>com.atlassian.confluence.plugins.soy:soy-core-functions</functions>
+            </transformer>
+        </transformation>
+        <dependency>com.atlassian.auiplugin:aui-experimental-iconfont</dependency>
+        <dependency>com.atlassian.auiplugin:aui-experimental-soy-templates</dependency>
+
+        <resource type="download" name="ohp.soy.js" location="/templates/ohp.soy" />
+        <resource type="download" name="dad.soy.js" location="/templates/dad.soy" />
+    </web-resource>
+
+    <web-resource key="preview" name="Macro Preview Web Resources">
+        <transformation extension="js">
+            <transformer key="jsI18n"/>
+        </transformation>
+        <dependency>com.mesilat.oracle-htp-plugin:util</dependency>
+
+        <resource type="download" name="preview.css"    location="/css/preview.css"/>
+        <resource type="download" name="preview.js"     location="/js/preview.js"/>
+        <context>preview</context>
+    </web-resource>
+
+    <web-resource key="test-resources" name="Oracle PLSQL Rest API Test Web Resources">
+        <transformation extension="js">
+            <transformer key="jsI18n"/>
+        </transformation>
+        <dependency>com.atlassian.auiplugin:ajs</dependency>
+        <resource type="download" name="test.js"  location="/js/test.js"/>
+    </web-resource>
+
+
+
+
+
+    <component-import key="userManager" interface="com.atlassian.sal.api.user.UserManager">
+        <description>Imported system component</description>
+    </component-import>
+    <component-import key="loginUriProvider" interface="com.atlassian.sal.api.auth.LoginUriProvider">
+        <description>Imported system component</description>
+    </component-import>
+    <component-import key="renderer" interface="com.atlassian.templaterenderer.velocity.one.six.VelocityTemplateRenderer">
+        <description>Imported system component</description>
+    </component-import>
+    <component-import key="pluginSettingsFactory" interface="com.atlassian.sal.api.pluginsettings.PluginSettingsFactory">
+        <description>Imported system component</description>
+    </component-import>
+    <component-import key="transactionTemplate" interface="com.atlassian.sal.api.transaction.TransactionTemplate">
+        <description>Imported system component</description>
+    </component-import>
+    <component-import key="i18nResolver" interface="com.atlassian.sal.api.message.I18nResolver">
+        <description>Imported system component</description>
+    </component-import>
+    <component-import key="xhtmlContent">
+        <interface>com.atlassian.confluence.xhtml.api.XhtmlContent</interface>
+        <description>Imported system component</description>
+    </component-import>
+    <component-import key="ap" interface="com.atlassian.activeobjects.external.ActiveObjects">
+        <description>Imported system component</description>
+    </component-import>
+
+    <servlet key="config" class="com.mesilat.ora.ConfigServlet" name="Configuration Servlet">
+        <description>Provides plugin configuration</description>
+        <url-pattern>/oracle-htp/config</url-pattern>
+    </servlet>
+    <servlet key="test" class="com.mesilat.ora.TestServlet" name="Test Servlet">
+        <description>Provides plugin testing</description>
+        <url-pattern>/oracle-htp/test</url-pattern>
+    </servlet>
+
+    <rest key="rest" path="/oracle-htp-api" version="1.0" name="Rest Resources">
+        <description>Provides REST resources for the plugin</description>
+    </rest>
+
+    <component key="oracleConnectionCache" class="com.mesilat.ora.DelegatingConnectionCache">
+        <description>Oracle database connection cache</description>
+    </component>
+    <component key="plsqlCache" class="com.mesilat.ora.PlsqlCacheImpl">
+        <description>PLSQL block and parameter cache</description>
+    </component>
+    <component key="gelfLogger" class="com.mesilat.ora.GelfLogSender">
+        <description>Gelf logger</description>
+    </component>
+    <component key="dadCache" class="com.mesilat.ora.DadCacheImpl">
+        <description>DAD cache</description>
+    </component>
+
+    <xhtml-macro name="dad-selector-macro" class="com.mesilat.ora.DadSelectorMacro" key="dad-selector-macro" state="enabled"
+                    icon="/download/resources/com.mesilat.oracle-htp-plugin/images/pluginLogo.png">
+        <description key="com.mesilat.oracle-htp-plugin.dad-selector-macro.desc">Select Data Access Descriptor to use with your page</description>
+        <category name="reporting"/>
+        <category name="external-content"/>
+        <parameters>
+            <parameter name="default" type="string"/>
+        </parameters>
+    </xhtml-macro>
+
+    <xhtml-macro name="oracle-htp-macro" class="com.mesilat.ora.OracleHTPMacro" key="oracle-htp-macro" state="enabled"
+                    icon="/download/resources/com.mesilat.oracle-htp-plugin/images/pluginLogo.png">
+        <resource type="i18n" name="i18n" location="i18n/oracle-htp"/>
+        <category name="reporting"/>
+        <category name="external-content"/>
+        <description key="com.mesilat.oracle-htp-plugin.oracle-htp-macro.desc">Call Oracle stored procedure from Confluence and print whatever HTML is produced by it</description>
+        <parameters>
+            <parameter name="method" type="enum" default="lazy" required="true">
+                <value name="inline"/>
+                <value name="lazy"/>
+                <value name="rest"/>
+                <value name="c3js"/>
+            </parameter>
+            <parameter name="dad" type="string"/>
+            <parameter name="p1" type="string"/>
+            <parameter name="p2" type="string"/>
+            <parameter name="p3" type="string"/>
+            <parameter name="p4" type="string"/>
+            <parameter name="p5" type="string"/>
+            <parameter name="p6" type="string"/>
+            <parameter name="p7" type="string"/>
+            <parameter name="p8" type="string"/>
+            <parameter name="p9" type="string"/>
+            <parameter name="p10" type="string"/>
+            <parameter name="sidebar" type="boolean" default="true"/>
+            <parameter name="display" type="enum" default="block" required="true">
+                <value name="block"/>
+                <value name="inline"/>
+            </parameter>
+            <parameter name="autorefresh" type="string"/>
+            <parameter name="myid" type="string" hidden="true"/>
+        </parameters>
+    </xhtml-macro>
+
+    <web-item name="Oracle HTP Plugin" key="oracle-htp-plugin-link-confluence" application="confluence" i18n-name-key="oracle-htp-plugin.plugin.name" weight="900" section="system.admin/administration">
+        <description key="oracle-htp-plugin.plugin.desc">This plugin for Atlassian Confluence acts as a web gateway for your Oracle database</description>
+        <label key="oracle-htp-plugin.config.label"/>
+        <link linkId="oracle-htp-plugin-link">/plugins/servlet/oracle-htp/config</link>
+    </web-item>
+
+    <ao key="ao-module" name="Active Objects">
+        <entity>com.mesilat.ora.ColumnLink</entity>
+        <entity>com.mesilat.ora.ParameterDescription</entity>
+        <entity>com.mesilat.ora.DataAccessDescriptor</entity>
+        <entity>com.mesilat.ora.DataAccessGrant</entity>
+    </ao>
+</atlassian-plugin>

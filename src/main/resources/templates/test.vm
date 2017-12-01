@@ -1,0 +1,142 @@
+<html>
+    <head>
+        <title>$i18n.getText("oracle-htp-plugin.test.label")</title>
+        <meta name="decorator" content="atl.general">
+        $webResourceManager.requireResource("com.mesilat.oracle-htp-plugin:test-resources")
+    </head>
+    <body>
+
+#if($notAuthorized)
+    <div class="aui-message error">
+        <p class="title">
+            <span class="aui-icon icon-error"></span>
+            <strong>$i18n.getText("com.mesilat.oracle-htp-plugin.error.not-authorized")</strong>
+        </p>
+        <p>$i18n.getText("com.mesilat.oracle-htp-plugin.error.authorized")</p>
+    </div>
+#else
+    <h3>$i18n.getText("oracle-htp-plugin.test.header")</h3>
+    <form id="test" class="aui">
+        <div class="field-group">
+            <label for="dad">$i18n.getText("oracle-htp-plugin.test.dad.label")</label>
+            <select id="dad" name="dad" class="select" data-value="$dad"></select>
+        </div>
+        <div class="field-group">
+            <label for="pageid">$i18n.getText("oracle-htp-plugin.test.pageid.label")</label>
+            <input type="text" id="pageid" name="pageid" class="text" value="$pageid">
+        </div>
+        <div class="field-group">
+            <label for="macroKey">$i18n.getText("oracle-htp-plugin.test.macroKey.label")</label>
+            <input type="text" id="macroKey" name="macroKey" class="text" value="$macroKey">
+        </div>
+        <div class="field-group">
+            <label for="param1">
+            #if($params.p1)
+                $params.p1.description
+            #else
+                $i18n.getText("com.mesilat.oracle-htp-plugin.oracle-htp-macro.param.p1.label")
+            #end
+            </label>
+            <input type="text" id="param1" name="param1" class="text">
+        </div>
+        <div class="field-group">
+            <label for="param3">
+            #if($params.p2)
+                $params.p2.description
+            #else
+                $i18n.getText("com.mesilat.oracle-htp-plugin.oracle-htp-macro.param.p2.label")
+            #end
+            </label>
+            <input type="text" id="param2" name="param2" class="text">
+        </div>
+        <div class="field-group">
+            <label for="param3">
+            #if($params.p3)
+                $params.p3.description
+            #else
+                $i18n.getText("com.mesilat.oracle-htp-plugin.oracle-htp-macro.param.p3.label")
+            #end
+            </label>
+            <input type="text" id="param3" name="param3" class="text">
+        </div>
+        <div class="field-group">
+            <label for="param4">
+            #if($params.p4)
+                $params.p4.description
+            #else
+                $i18n.getText("com.mesilat.oracle-htp-plugin.oracle-htp-macro.param.p4.label")
+            #end
+            </label>
+            <input type="text" id="param4" name="param4" class="text">
+        </div>
+        <div class="field-group">
+            <label for="param5">
+            #if($params.p5)
+                $params.p5.description
+            #else
+                $i18n.getText("com.mesilat.oracle-htp-plugin.oracle-htp-macro.param.p5.label")
+            #end
+            </label>
+            <input type="text" id="param5" name="param5" class="text">
+        </div>
+        <div class="field-group">
+            <label for="param6">
+            #if($params.p6)
+                $params.p6.description
+            #else
+                $i18n.getText("com.mesilat.oracle-htp-plugin.oracle-htp-macro.param.p6.label")
+            #end
+            </label>
+            <input type="text" id="param6" name="param6" class="text">
+        </div>
+        <div class="field-group">
+            <label for="param7">
+            #if($params.p7)
+                $params.p7.description
+            #else
+                $i18n.getText("com.mesilat.oracle-htp-plugin.oracle-htp-macro.param.p7.label")
+            #end
+            </label>
+            <input type="text" id="param7" name="param7" class="text">
+        </div>
+        <div class="field-group">
+            <label for="param8">
+            #if($params.p8)
+                $params.p8.description
+            #else
+                $i18n.getText("com.mesilat.oracle-htp-plugin.oracle-htp-macro.param.p8.label")
+            #end
+            </label>
+            <input type="text" id="param8" name="param8" class="text">
+        </div>
+        <div class="field-group">
+            <label for="param9">
+            #if($params.p9)
+                $params.p9.description
+            #else
+                $i18n.getText("com.mesilat.oracle-htp-plugin.oracle-htp-macro.param.p9.label")
+            #end
+            </label>
+            <input type="text" id="param9" name="param9" class="text">
+        </div>
+        <div class="field-group">
+            <label for="param10">
+            #if($params.p10)
+                $params.p10.description
+            #else
+                $i18n.getText("com.mesilat.oracle-htp-plugin.oracle-htp-macro.param.p10.label")
+            #end
+            </label>
+            <input type="text" id="param10" name="param10" class="text">
+        </div>
+
+        <div class="field-group">
+            <input type="submit" value="$i18n.getText("oracle-htp-plugin.test.submit")" class="button">
+        </div>
+
+        <div id="test-result" class="aui-message" style="display:none;">
+        </div>
+    </form>
+#end
+  </body>
+</html>

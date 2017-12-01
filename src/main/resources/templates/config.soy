@@ -1,0 +1,23 @@
+{namespace Mesilat.Templates.Oracle}
+
+/**
+ * DAD template
+ * @param dad 
+ */
+{template .dadTableRow}
+<tr>
+    <td class="confluenceTd">{if $dad.name}{$dad.name}{/if}</td>
+    <td class="confluenceTd">{if $dad.host}{$dad.host}{/if}</td>
+    <td class="confluenceTd">{if $dad.port}{$dad.port}{/if}</td>
+    <td class="confluenceTd">{if $dad.service}{$dad.service}{/if}</td>
+    <td class="confluenceTd">{if $dad.username}{$dad.username}{/if}</td>
+    <td class="confluenceTd">{if $dad.maxConnections}{$dad.maxConnections}{/if}</td>
+    <td class="confluenceTd">{if $dad.grantees}{$dad.grantees}{/if}</td>
+    <td class="confluenceTd">
+        <button class="aui-button oracle-htp-edit">{getText('com.mesilat.oracle-htp-plugin.common.edit')}</button>
+        <button class="aui-button oracle-htp-delete">{getText('com.mesilat.oracle-htp-plugin.common.delete')}</button>
+        <button class="aui-button oracle-htp-test">{getText('oracle-htp-plugin.config.dad.action.test')}</button>
+        <div class="aui-message" style="display:none;"></div>
+    </td>
+</tr>
+{/template}

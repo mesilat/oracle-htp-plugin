@@ -1,0 +1,9 @@
+ul.oracle-htp-block-types li {
+    list-style-type: none;
+    display: inline-block;
+}
+
+#oracle-htp-plugin-preview  textarea {
+    width: 100%;
+    height: 300px;
+}

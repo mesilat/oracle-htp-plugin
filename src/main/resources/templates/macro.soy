@@ -1,0 +1,189 @@
+{namespace Mesilat.Templates.Oracle}
+
+/**
+ * Setup dialog template
+ * @param recs
+ * @param columnNames
+ */
+{template .setupLinksDialog}
+    <section role="dialog" class="aui-layer aui-dialog2 aui-dialog2-large com-mesilat-setup-links-dialog" aria-hidden="true">
+        <header class="aui-dialog2-header">
+            <h2 class="aui-dialog2-header-main">{getText('com.mesilat.oracle-htp-plugin.links.setup-dialog-caption')}</h2>
+            <a class="aui-dialog2-header-close">
+                <span class="aui-icon aui-icon-small aui-iconfont-close-dialog">{getText('com.mesilat.oracle-htp-plugin.common.close')}</span>
+            </a>
+        </header>
+        <div class="aui-dialog2-content">
+            {call .listOfColumnLinks}
+                {param recs: $recs/}
+                {param columnNames: $columnNames/}
+            {/call}
+        </div>
+        <footer class="aui-dialog2-footer">
+            <div class="aui-dialog2-footer-actions">
+                <button class="aui-button aui-button-primary save">{getText('com.mesilat.oracle-htp-plugin.common.save')}</button>
+                <button class="aui-button aui-button-link cancel" resolved>{getText('com.mesilat.oracle-htp-plugin.common.cancel')}</button>
+            </div>
+        </footer>
+    </section>
+{/template}
+
+/**
+ * List of column links template
+ * @param recs
+ * @param columnNames
+ */
+{template .listOfColumnLinks}
+<div class="wiki-content">
+<form class="aui">
+<table class="aui">
+<thead>
+<tr>
+    <th>{getText('com.mesilat.oracle-htp-plugin.links.column.label')}</th>
+    <th>{getText('com.mesilat.oracle-htp-plugin.links.url.label')}</th>
+    <th>{getText('com.mesilat.oracle-htp-plugin.links.paramName.label')}</th>
+</tr>
+</thead>
+<tbody>
+    {foreach $rec in $recs}
+        {call .columnLink}
+            {param rec: $rec/}
+            {param columnNames: $columnNames/}
+        {/call}
+    {/foreach}
+</tbody>
+</table>
+</form>
+<button class="aui-button aui-button-link addnew" resolved>{getText('com.mesilat.oracle-htp-plugin.links.addNew')}</button>
+</div>
+{/template}
+
+/**
+ * Column link template
+ * @param rec
+ * @param columnNames
+ */
+{template .columnLink}
+<tr>
+    <td class="oracle-htp-links-column-name">
+        <select class="select" name="column">
+        {foreach $col in $columnNames}
+            <option value="{$col}"{if $rec.columnName == $col} selected{/if}>{$col}</option>
+        {/foreach}
+        </select>
+    </td>
+    <td class="oracle-htp-links-url">
+        <input type="hidden" name="url"{if $rec.url} value="{$rec.url}"{/if}/><!--  class="text full-width-field" prompt="{getText('com.mesilat.oracle-htp-plugin.links.url.label')}" -->
+    </td>
+    <td class="oracle-htp-links-param-name">
+        <input type="text" name="paramName" class="text" prompt="{getText('com.mesilat.oracle-htp-plugin.links.paramName.label')}"{if $rec.paramName} value="{$rec.paramName}"{/if}/>&nbsp;<span
+            class="aui-icon aui-icon-large aui-iconfont-remove-label" original-title="{getText('com.mesilat.oracle-htp-plugin.common.remove')}">{getText('com.mesilat.oracle-htp-plugin.links.remove')}</span>
+    </td>
+</tr>
+{/template}
+
+
+/**
+ * Edit form buttons template
+ */
+{template .editFormButtons}
+<div class="buttons-container oracle-htp-edit-buttons">
+    <div class="buttons">
+        <input class="button submit" type="submit" value="Save">
+        &nbsp;
+        <a class="back" href="#">{getText('com.mesilat.oracle-htp-plugin.common.back')}</a>
+    </div>
+</div>
+{/template}
+
+
+/**
+ * Side menu template
+ */
+{template .sideMenu}
+<div class="oracle-htp-sidemenu">
+    <div>
+    <button class="aui-button aui-button-compact" resolved>
+        <span class="aui-icon aui-icon-small aui-iconfont-search">{getText('com.mesilat.oracle-htp-plugin.sidebar.parameters')}</span>
+    </button>
+    </div>
+    <div>
+    <button class="aui-button aui-button-compact" resolved>
+        <span class="aui-icon aui-icon-small aui-iconfont-link">{getText('com.mesilat.oracle-htp-plugin.sidebar.links')}</span>
+    </button>
+    </div>
+    <div>
+    <button class="aui-button aui-button-compact" resolved>
+        <span class="aui-icon aui-icon-small aui-iconfont-build">{getText('com.mesilat.oracle-htp-plugin.sidebar.invoke')}</span>
+    </button>
+    </div>
+</div>
+{/template}
+
+/**
+ * Parameters dialog template
+ * @param params
+ */
+{template .parametersDialog}
+    <section role="dialog" class="aui-layer aui-dialog2 aui-dialog2-large oracle-htp-parameters-dialog" aria-hidden="true">
+        <header class="aui-dialog2-header">
+            <h2 class="aui-dialog2-header-main">{getText('com.mesilat.oracle-htp-plugin.parameters.dialog-caption')}</h2>
+            <a class="aui-dialog2-header-close">
+                <span class="aui-icon aui-icon-small aui-iconfont-close-dialog">{getText('com.mesilat.oracle-htp-plugin.common.close')}</span>
+            </a>
+        </header>
+        <div class="aui-dialog2-content">
+        <form class="aui">
+            {call .parameterField}{param param: $params.p1/}{/call}
+            {call .parameterField}{param param: $params.p2/}{/call}
+            {call .parameterField}{param param: $params.p3/}{/call}
+            {call .parameterField}{param param: $params.p4/}{/call}
+            {call .parameterField}{param param: $params.p5/}{/call}
+            {call .parameterField}{param param: $params.p6/}{/call}
+            {call .parameterField}{param param: $params.p7/}{/call}
+            {call .parameterField}{param param: $params.p8/}{/call}
+            {call .parameterField}{param param: $params.p9/}{/call}
+            {call .parameterField}{param param: $params.p10/}{/call}
+        </form>
+        </div>
+        <footer class="aui-dialog2-footer">
+            <div class="aui-dialog2-footer-actions">
+                <button class="aui-button aui-button-primary apply">{getText('com.mesilat.oracle-htp-plugin.common.apply')}</button>
+                <button class="aui-button aui-button-link cancel" resolved>{getText('com.mesilat.oracle-htp-plugin.common.cancel')}</button>
+            </div>
+        </footer>
+    </section>
+{/template}
+
+
+/**
+ * Parameter field template
+ * @param param
+ */
+{template .parameterField}
+<div class="field-group">
+    <label for="{$param.paramId}">{$param.description}</label>
+    <input class="text long-field" type="text" name="{$param.paramId}"{if $param.value} value="{$param.value}"{/if}/>
+</div>
+{/template}
+
+
+/**
+ * Macro updating template
+ */
+{template .macroUpdating}
+<div style="height:40px;">
+    {getText('com.mesilat.oracle-htp-plugin.text.loading-data')}<span style="width:20px;display:inline-block;"> </span>
+</div>
+{/template}
+
+
+/**
+ * Error in macro template
+ * @param text
+ */
+{template .errorInMacro}
+<div class="aui-message aui-message-error">
+<pre>{$text}</pre>
+</div>
+{/template}

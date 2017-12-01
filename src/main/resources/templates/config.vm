@@ -1,0 +1,142 @@
+<html>
+    <head>
+        <title>$i18n.getText("oracle-htp-plugin.config.label")</title>
+        <meta name="decorator" content="atl.admin">
+        $webResourceManager.requireResource("com.mesilat.oracle-htp-plugin:config-resources")
+    </head>
+    <body>
+
+    <div class="aui-tabs horizontal-tabs">
+        <ul class="tabs-menu">
+            <li class="menu-item active-tab">
+                <a href="#tab-ohp-1">$i18n.getText("oracle-htp-plugin.config.tab.driver")</a>
+            </li>
+            <li class="menu-item">
+                <a href="#tab-ohp-2">$i18n.getText("oracle-htp-plugin.config.tab.dads")</a>
+            </li>
+            <li class="menu-item">
+                <a href="#tab-ohp-3">$i18n.getText("oracle-htp-plugin.config.tab.gelf")</a>
+            </li>
+        </ul>
+
+        <div class="tabs-pane active-pane" id="tab-ohp-1">
+            <h3>$i18n.getText("oracle-htp-plugin.config.header")</h3>
+            <p><span class="aui-icon aui-icon-small aui-iconfont-info" original-title="info">Attention:</span>
+            $i18n.getText("oracle-htp-plugin.config.driver.comment") <span id="catalina-home"></span></p>
+            <form id="config" class="aui">
+                <div class="field-group">
+                    <label for="driverPath">$i18n.getText("oracle-htp-plugin.config.driver.label")</label>
+                    <input type="text" name="driverPath" class="text">
+                </div>
+                <div class="field-group">
+                    <label for="connectionCacheSize">$i18n.getText("oracle-htp-plugin.config.connectionCacheSize.label")</label>
+                    <input type="text" name="connectionCacheSize" class="text">
+                </div>
+                <div class="field-group">
+                    <label for="connectTimeout">$i18n.getText("oracle-htp-plugin.config.connectTimeout.label")</label>
+                    <input type="text" name="connectTimeout" class="text">
+                </div>
+                <div class="field-group">
+                    <label for="inactivityTimeout">$i18n.getText("oracle-htp-plugin.config.inactivityTimeout.label")</label>
+                    <input type="text" name="inactivityTimeout" class="text">
+                </div>
+                <div class="field-group">
+                    <input type="submit" value="$i18n.getText("com.mesilat.oracle-htp-plugin.common.save")" class="button">
+                </div>
+                <div id="config-result" class="aui-message" style="display:none;"></div>
+            </form>
+        </div>
+
+
+        <div class="tabs-pane" id="tab-ohp-2">
+            <h3>$i18n.getText("oracle-htp-plugin.config.dads.header")</h3>
+            <div>
+                <table id="data-access-descriptors" class="confluenceTable">
+                    <thead>
+                        <row>
+                            <th class="confluenceTh">$i18n.getText("oracle-htp-plugin.config.dad.name.label")</th>
+                            <th class="confluenceTh">$i18n.getText("oracle-htp-plugin.config.dad.host.label")</th>
+                            <th class="confluenceTh">$i18n.getText("oracle-htp-plugin.config.dad.port.label")</th>
+                            <th class="confluenceTh">$i18n.getText("oracle-htp-plugin.config.dad.service.label")</th>
+                            <th class="confluenceTh">$i18n.getText("oracle-htp-plugin.config.dad.username.label")</th>
+                            <th class="confluenceTh">$i18n.getText("oracle-htp-plugin.config.dad.maxConnections.label")</th>
+                            <th class="confluenceTh">$i18n.getText("oracle-htp-plugin.config.dad.grantees.label")</th>
+                            <th class="confluenceTh">$i18n.getText("oracle-htp-plugin.config.dad.action.label")</th>
+                        </row>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
+            </div>
+
+            <p>$i18n.getText("oracle-htp-plugin.config.dad.createText")</p>
+
+            <h4>$i18n.getText("oracle-htp-plugin.config.dad.create")</h4>
+            <form id="dads" class="aui">
+                <input type="hidden" name="id" class="text">
+                <div class="field-group">
+                    <label for="name">$i18n.getText("oracle-htp-plugin.config.dad.name.label")</label>
+                    <input type="text" name="name" class="text medium-long-field">
+                </div>
+                <div class="field-group">
+                    <label for="host">$i18n.getText("oracle-htp-plugin.config.dad.host.label")</label>
+                    <input type="text" name="host" class="text medium-long-field">
+                </div>
+                <div class="field-group">
+                    <label for="port">$i18n.getText("oracle-htp-plugin.config.dad.port.label")</label>
+                    <input type="text" name="port" class="text medium-long-field">
+                </div>
+                <div class="field-group">
+                    <label for="service">$i18n.getText("oracle-htp-plugin.config.dad.service.label")</label>
+                    <input type="text" name="service" class="text medium-long-field">
+                </div>
+                <div class="field-group">
+                    <label for="username">$i18n.getText("oracle-htp-plugin.config.dad.username.label")</label>
+                    <input type="text" name="username" class="text medium-long-field">
+                </div>
+                <div class="field-group">
+                    <label for="password">$i18n.getText("oracle-htp-plugin.config.dad.password.label")</label>
+                    <input type="password" name="password" class="text medium-long-field">
+                </div>
+                <div class="field-group">
+                    <label for="maxConnections">$i18n.getText("oracle-htp-plugin.config.dad.maxConnections.label")</label>
+                    <input type="text" name="maxConnections" class="text medium-long-field">
+                </div>
+                <div class="field-group">
+                    <label for="grantees">$i18n.getText("oracle-htp-plugin.config.dad.grantees.label")</label>
+                    <input type="text" name="grantees" class="autocomplete-multiusergroup text medium-long-field">
+                </div>
+
+                <div class="field-group">
+                    <input type="submit" value="$i18n.getText("com.mesilat.oracle-htp-plugin.common.save")" class="button">
+                </div>
+                <div id="dad-result" class="aui-message" style="display:none;"></div>
+            </form>
+        </div>
+
+
+        <div class="tabs-pane" id="tab-ohp-3">
+            <form id="oracle-htp-gelf" class="aui">
+                <div class="field-group">
+                    <label for="server">$i18n.getText("oracle-htp-plugin.config.gelf.server.label")</label>
+                    <input type="text" name="server" class="text">
+                </div>
+                <div class="field-group">
+                    <label for="port">$i18n.getText("oracle-htp-plugin.config.gelf.port.label")</label>
+                    <input type="text" name="port" class="text" placeholder="12201">
+                </div>
+                <div class="field-group">
+                    <label for="source">$i18n.getText("oracle-htp-plugin.config.gelf.source.label")</label>
+                    <input type="text" name="source" class="text" placeholder="127.0.0.1">
+                </div>
+
+                <div class="field-group">
+                    <input type="submit" value="$i18n.getText("com.mesilat.oracle-htp-plugin.common.save")" class="button">
+                </div>
+                <div class="aui-message" style="display:none;"></div>
+            </form>
+        </div>
+    </div>
+
+  </body>
+</html>

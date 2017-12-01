@@ -1,0 +1,164 @@
+{namespace Mesilat.Templates.Oracle}
+
+/**
+ * Converter options template
+ * @param baseUrl
+ * @param blockTypes
+ * @param macroParams
+ * @param body
+ */
+{template .converterOptions}
+<div id="oracle-htp-plugin-preview" class="wiki-content" oracle-htp-plugin-params="{$macroParams|noAutoescape}">
+    <p>{getText('oracle-htp-plugin.autoconvert.preview')|noAutoescape}</p>
+    <ul class="oracle-htp-block-types">
+        {foreach $blockType in $blockTypes}
+            {call .converterOption}
+                {param baseUrl: $baseUrl/}
+                {param blockType: $blockType/}
+            {/call}
+        {/foreach}
+    </ul>
+</div>
+<div id="oracle-htp-plugin-body" style="display:none">{$body}</div>
+{/template}
+
+
+/**
+ * Single converter option template
+ * @param baseUrl
+ * @param blockType
+ */
+{template .converterOption}
+<li>
+    <a href="#">
+        <img src="{$baseUrl}/download/resources/com.mesilat.oracle-htp-plugin/images/{$blockType}.png"
+            title="{getText('oracle-htp-plugin.autoconvert.blocktype.' + $blockType)}"
+            oracle-htp-plugin-template="{$blockType}"
+        />
+    </a>
+</li>
+{/template}
+
+
+/**
+ * Print body template
+ * @param body
+ */
+{template .body}
+    <div class="wiki-content">
+        <pre>{$body}</pre>
+    </div>
+{/template}
+
+
+
+/**
+ * Error in Macro template
+ * @param title
+ * @param text
+ */
+{template .errorInMacroWithTitle}
+{call aui.message.warning}
+    {param title: $title /}
+    {param closeable: 'false' /}
+    {param content}
+        <p>{$text}</p>
+    {/param}
+{/call}
+{/template}
+
+
+/**
+ * Inline Macro Block template
+ * @param macroKey
+ * @param sidebar
+ * @param display
+ * @param hasLinks
+ * @param dad
+ * @param data
+ */
+{template .macroInline}
+<div class="wiki-content oracle-htp-macro-inline
+    {if $sidebar} oracle-htp-macro-sidebar{/if}
+    {if $display} oracle-htp-macro-display-{$display}{/if}
+    {if $hasLinks} oracle-htp-macro-links{/if}
+    " macro-key="{$macroKey}" dad="{$dad}">
+    {$data|noAutoescape}
+</div>
+{/template}
+
+
+/**
+ * REST Macro Block template
+ * @param body
+ * @param json
+ * @param test
+ */
+{template .macroRest}
+<p>{getText('oracle-htp-plugin.oracle-htp-macro.text.1')}</p>
+<div class="code panel pdl" style="border-width: 1px;">
+    <div class="codeContent panelContent pdl">
+        <pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: sql; gutter: true; theme: Confluence" data-theme="Confluence">
+        {$body}
+        </pre>
+    </div>
+</div>
+<p>{getText('oracle-htp-plugin.oracle-htp-macro.text.2')}</p>
+<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: js; gutter: false; theme: Confluence" data-theme="Confluence">
+{$json}
+</pre>
+<p>{$test|noAutoescape}</p>
+{/template}
+
+
+/**
+ * Lazy Macro Block template
+ * @param body
+ * @param macroKey
+ * @param sidebar
+ * @param display
+ * @param dad
+ * @param params
+ * @param autorefresh
+ */
+{template .macroLazy}
+{if $macroKey}
+<div class="wiki-content oracle-htp-macro-lazy
+    {if $sidebar} oracle-htp-macro-sidebar{/if}
+    {if $display} oracle-htp-macro-display-{$display}{/if}
+    " macro-key="{$macroKey}" dad="{$dad}"
+    {if $autorefresh > 0} oracle-htp-autorefresh={$autorefresh}{/if}>
+    {$params}
+</div>
+{else}
+<div class="wiki-content">
+    <pre>{$body}</pre>
+</div>
+{/if}
+{/template}
+
+
+
+/**
+ * Chart (c3js) Macro Block template
+ * @param body
+ * @param macroKey
+ * @param sidebar
+ * @param display
+ * @param dad
+ * @param params
+ */
+{template .macroC3js}
+{if $macroKey}
+<div class="wiki-content oracle-htp-macro-c3js
+    {if $sidebar} oracle-htp-macro-sidebar{/if}
+    {if $display} oracle-htp-macro-display-{$display}{/if}
+    " macro-key="{$macroKey}" dad="{$dad}">
+    {$params}
+</div>
+{else}
+<div class="wiki-content">
+    <pre>{$body}</pre>
+</div>
+{/if}
+{/template}

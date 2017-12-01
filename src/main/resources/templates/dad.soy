@@ -1,0 +1,51 @@
+{namespace Mesilat.Templates.Oracle}
+
+/**
+ * No DADs defined template
+ * @param msg 
+ */
+{template .noDads}
+<div class="wiki-content">
+    <p>{$msg}</p>
+</div>
+{/template}
+
+
+/**
+ * List of DADs template
+ * @param dadNames
+ * @param defaultDad
+ */
+{template .dadList}
+<div class="wiki-content">
+    <p>{getText('com.mesilat.oracle-htp-plugin.text.list-of-dads')}</p>
+    <ul>
+        {foreach $dadName in $dadNames}
+            {if $defaultDad == $dadName}
+                <li><strong>{$dadName}  ({getText('com.mesilat.oracle-htp-plugin.dad-selector-macro.param.default.legend')})</strong></li>
+            {else}
+                <li>{$dadName}</li>
+            {/if}
+        {/foreach}
+    </ul>
+</div>
+{/template}
+
+
+/**
+ * DAD selector template
+ * @param dadNames
+ * @param defaultDad
+ */
+{template .dadSelector}
+<div class="wiki-content">
+    <select class="ohp-dad-selector">
+        {foreach $dadName in $dadNames}
+            <option value="{$dadName}"{if $dadName == $defaultDad} selected{/if}>{$dadName}</option>
+        {/foreach}
+    </select>
+    <button class="aui-button ohp-dad-refresh" resolved>
+        <span class="aui-icon aui-icon-small aui-iconfont-build">{getText('com.mesilat.oracle-htp-plugin.common.refresh')}...</span>
+    </button>
+</div>
+{/template}
